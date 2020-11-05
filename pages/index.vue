@@ -26,7 +26,7 @@
           <td>{{ item.content }}</td>
           <td>{{ item.created }}</td>
           <td><button class="button">{{ item.state }}</button></td>
-          <td><button class="button button--delete">削除</button></td>
+          <td><button class="button button--red" @click="remove(item)">削除</button></td>
         </tr>
       </tbody>
     </table>
@@ -47,13 +47,16 @@ export default {
     ...mapState(['todos'])
   },
   methods: {
-  insert: function() {
-    if(this.content != ''){
-      this.$store.commit('insert', {content: this.content});
-      this.content = '';
+    insert: function() {
+      if(this.content != ''){
+        this.$store.commit('insert', {content: this.content});
+        this.content = '';
+      }
+    },
+    remove: function(todo) {
+      this.$store.commit('remove', todo)
     }
   }
-}
 }
 </script>
 <style>
